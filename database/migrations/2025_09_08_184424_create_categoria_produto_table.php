@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('categoria_produto', function (Blueprint $table) {
             $table->id();
             $table->string("name", 100);
-            $table->string("category description", 200);
+            $table->string("description", 200);
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categoria');
+        Schema::dropIfExists('categoria_produto');
     }
 };

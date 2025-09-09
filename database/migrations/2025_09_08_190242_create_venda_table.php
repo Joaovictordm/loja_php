@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('vendas', function (Blueprint $table) {
             $table->id();
             $table->string("seller", 100);
+            $table->integer("quantity");
+            $table->decimal("unit price", 10, 2);
             $table->foreignId("produto_id")->constrained("produtos");
             $table->timestamps();
         });
