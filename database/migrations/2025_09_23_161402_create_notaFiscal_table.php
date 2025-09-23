@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vendas', function (Blueprint $table) {
+        Schema::create('nota_fiscal', function (Blueprint $table) {
             $table->id();
-            $table->string("seller", 100);
-            $table->integer("quantity");
-            $table->decimal("unit price", 10, 2);
-            $table->foreignId("produto_id")->constrained("produtos");
+            $table->decimal("preco", 10,2);
+            $table->foreignId("cliente_id")->constrained("clientes");
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendas');
+        Schema::dropIfExists('nota_fiscal');
     }
 };
