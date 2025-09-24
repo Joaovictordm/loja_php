@@ -11,7 +11,7 @@ class NotaFiscalController extends Controller
     
     public function index()
     {
-        $vendas = NotaFiscal::with("cliente")->get();
+        $notaFiscal = NotaFiscal::with("cliente")->get();
         return view("notaFiscal.index", compact("notaFiscal"));
     }
 
@@ -20,7 +20,8 @@ class NotaFiscalController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = Cliente::pluck("nome", "id");
+        return view("notaFiscal.create", compact("clientes"));
     }
 
     /**
@@ -28,38 +29,43 @@ class NotaFiscalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        NotaFiscal::create($request->validated());
+        return redirect()->route("notaFiscal.index")->with("Sucess", "Nota fiscal gerada com sucesso");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Venda $venda)
+    public function show(NotaFiscal $notaFiscal)
     {
-        //
+        $notaFiscal->load("cliente");
+        return view("notaFiscal.show", compact("notaFiscal"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Venda $venda)
+    public function edit(NotaFiscal $notaFiscal)
     {
-        //
+        $clientes = Cliente::pluck("nome", "id");
+        return view("notaFiscal.edit", compact("notaFiscal", "clientes"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Venda $venda)
+    public function update(StoreNotaFiscalRequest $request, NotaFiscal $notaFiscal)
     {
-        //
+        $notaFiscal->update($request->validated());
+        return redirect()->route("notaFiscal.index")->with("sucess", "Nota gerada");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Venda $venda)
+    public function destroy( NotaFiscal $notaFiscal)
     {
-        //
+        $notaFiscal->delete();
+        return redirect()->route("notaFiscal.index")->with("Success", "nota excluída");
     }
 }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nota_fiscal', function (Blueprint $table) {
+        Schema::create('notas_fiscais', function (Blueprint $table) {
             $table->id();
             $table->decimal("preco", 10,2);
             $table->foreignId("cliente_id")->constrained("clientes");
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nota_fiscal');
+        Schema::dropIfExists('notas_fiscais');
     }
 };
