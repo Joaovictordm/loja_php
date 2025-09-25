@@ -27,7 +27,7 @@ class NotaFiscalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreNotaFiscalRequest $request)
     {
         NotaFiscal::create($request->validated());
         return redirect()->route("notaFiscal.index")->with("Sucess", "Nota fiscal gerada com sucesso");
